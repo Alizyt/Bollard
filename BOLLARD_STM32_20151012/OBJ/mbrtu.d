@@ -1,0 +1,14 @@
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\rtu\mbrtu.c
+..\OBJ\mbrtu.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdlib.h
+..\OBJ\mbrtu.o: D:\apps\keil\ARM\ARMCC\bin\..\include\string.h
+..\OBJ\mbrtu.o: ..\HARDWARE\PORT\port.h
+..\OBJ\mbrtu.o: D:\apps\keil\ARM\ARMCC\bin\..\include\assert.h
+..\OBJ\mbrtu.o: D:\apps\keil\ARM\ARMCC\bin\..\include\inttypes.h
+..\OBJ\mbrtu.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdint.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\include\mb.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\include\mbport.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\include\mbproto.h
+..\OBJ\mbrtu.o: ..\FATFS\src\integer.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\rtu\mbrtu.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\include\mbframe.h
+..\OBJ\mbrtu.o: ..\HARDWARE\MODBUS\rtu\mbcrc.h

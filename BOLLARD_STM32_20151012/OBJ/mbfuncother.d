@@ -1,0 +1,13 @@
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\functions\mbfuncother.c
+..\OBJ\mbfuncother.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdlib.h
+..\OBJ\mbfuncother.o: D:\apps\keil\ARM\ARMCC\bin\..\include\string.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\PORT\port.h
+..\OBJ\mbfuncother.o: D:\apps\keil\ARM\ARMCC\bin\..\include\assert.h
+..\OBJ\mbfuncother.o: D:\apps\keil\ARM\ARMCC\bin\..\include\inttypes.h
+..\OBJ\mbfuncother.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdint.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\include\mb.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\include\mbport.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\include\mbproto.h
+..\OBJ\mbfuncother.o: ..\FATFS\src\integer.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\include\mbframe.h
+..\OBJ\mbfuncother.o: ..\HARDWARE\MODBUS\include\mbconfig.h
