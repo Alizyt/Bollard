@@ -81,6 +81,13 @@ typedef enum
 
 typedef enum
 {
+	NoCoilTrigger=0x00,
+	CoilFrontTrigger=0x01,
+	CoilRearTrigger=0x02
+}eGroundCoilStatus;
+
+typedef enum
+{
 	powerEvent,
 	controlEvent,
 	errorEvent,
@@ -132,6 +139,7 @@ typedef enum
 #define ReachLimit					0x01
 #define CascadeConnected		0x01
 #define StatusTrue					0x00	//IN7 IN8 IN11Âß¼­·´
+#define CoilTrue						0x01
 //#define ActionTrue					0x01	//¸Ä°æºóÉ¾³ý£¬IN7 IN8Âß¼­·´
 
 // #define BottonUp						0x01
@@ -184,6 +192,9 @@ typedef enum
 #define BollardUpIng				PEin(13)
 #define BollardDownIng			PBin(1)
 
+#define GroundCoilFront			PAin(5)
+#define GroundCoilRear			PAin(4)
+
 #define MXOF								PEin(2)
 
 void ControlFunction_Init(void);
@@ -195,6 +206,7 @@ void Alarm_Control(void);
 eLimitValue Limit_Scan(void);
 eCascadeConnection Cascade_Connection_Scan(void);
 eBollardStatus Bollard_Status_Scan(void);
+eGroundCoilStatus Ground_Coil_Scan(void);
 
 #endif
 

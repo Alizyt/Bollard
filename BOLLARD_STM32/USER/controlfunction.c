@@ -23,6 +23,10 @@ void ControlFunction_Init(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3|GPIO_Pin_4;//端口配置
 	GPIO_Init(GPIOE, &GPIO_InitStructure);					 //根据设定参数初始化GPIOE.3.4
 	GPIO_SetBits(GPIOE,GPIO_Pin_3|GPIO_Pin_4);	  //PE.3.4输出高
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;//端口配置
+	GPIO_Init(GPIOA, &GPIO_InitStructure);//根据设定参数初始化GPIOA6
+	GPIO_ResetBits(GPIOA,GPIO_Pin_6);//PA6输出低
 	//BottonInit
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_2;//PB2
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //设置成上拉输入
@@ -30,7 +34,7 @@ void ControlFunction_Init(void)
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_7|GPIO_Pin_8;//PE7.8
 	GPIO_Init(GPIOE, &GPIO_InitStructure);//初始化GPIOE7.8
 	//
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_7|GPIO_Pin_4|GPIO_Pin_5;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_0|GPIO_Pin_1;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);	
@@ -238,6 +242,14 @@ eBollardStatus Bollard_Status_Scan(void)
 	else if((BollardUpIng==StatusTrue)||(limitValue==upperLimitReach))		return UpIng;
 	else if((BollardDownIng==StatusTrue)||(limitValue==lowerLimitReach))	return DownIng;
 	
-	return 0;
+	return NoAction;
+}
+
+eGroundCoilStatus Ground_Coil_Scan(void)
+{
+	if(GroundCoilFront==CoilTrue) return CoilFrontTrigger;
+	else if(GroundCoilRear==CoilTrue) return CoilRearTrigger;
+	
+	return NoCoilTrigger;
 }
 

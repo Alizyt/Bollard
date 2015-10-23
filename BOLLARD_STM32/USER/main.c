@@ -16,8 +16,12 @@ u8 statusChange=0;//bollardStatus=0,bollardStatusPre=0,
 eBollardStatus bollardStatus,bollardStatusPre;
 u8 cascadeChange=0;//cascadeConnection=0,cascadeConnectionPre=0,
 eCascadeConnection cascadeConnection,cascadeConnectionPre,cascadeConnectionAft;
+//u8 coilTrigger=0;
+eGroundCoilStatus groundCoilStatus;
 
 u8 groundCoilOnOff=1,synchroOnOff=1,remoteOnOff=1;
+
+extern u8 controlOn;
 
 int main(void)
 {
@@ -78,6 +82,20 @@ int main(void)
 			cascadeChange=True;
 		}
 #endif
+		
+		groundCoilStatus=Ground_Coil_Scan();
+		if(groundCoilStatus && controlOn && (BollardControlUp==ControlEnable))
+		{
+			BollardControlUp=ControlDisable;
+			controlOn=0;
+			TIM_Cmd(TIM2,DISABLE);
+			TIM_SetCounter(TIM2,0);//
+			//event save
+		}
+// 		if(groundCoilStatus)
+// 		{
+// 			coilTrigger=True;
+// 		}
 		
 	}
 }

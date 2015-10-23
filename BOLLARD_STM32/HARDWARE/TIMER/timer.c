@@ -19,6 +19,8 @@ extern u8 statusChange;//bollardStatus,
 extern eBollardStatus bollardStatus;
 extern u8 cascadeChange;//cascadeConnection,
 extern eCascadeConnection cascadeConnectionAft;
+//extern u8 coilTrigger;
+extern eGroundCoilStatus groundCoilStatus;
 
 u8 bottonFlag=0,remoteFlag=0,cascadeFlag=0;
 eBollardControlSource controlSource;
@@ -360,7 +362,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						switch(limitValue)
 						{
 							case upperLimitReach:
-								if(BollardControlUp==ControlEnable)
+								if(BollardControlUp==ControlEnable)//||bollardStatus==Emergency
 								{
 									TIM_Cmd(TIM2,DISABLE); //
 									TIM_SetCounter(TIM2,0);
@@ -488,12 +490,21 @@ void TIM3_IRQHandler(void)   //TIM3中断
 							switch(bollardControlType)
 							{
 								case Control_Bollard_Up:
-									BollardControlUp=ControlEnable;
+									if(groundCoilStatus==NoCoilTrigger)
+									{
+										BollardControlUp=ControlEnable;
+										controlOn=1;
+										controlSource=Botton;//botton
+										TIM_Cmd(TIM2,ENABLE); //
+									}
 									//存SD卡记录，按钮上升记录
 									//Control_Event_Save(Control_Bollard_Up,Top,Botton);
 									break;
 								case Control_Bollard_Down:
 									BollardControlDown=ControlEnable;
+									controlOn=1;
+									controlSource=Botton;//botton
+									TIM_Cmd(TIM2,ENABLE); //
 									//存SD卡记录，按钮下降记录
 									break;
 								case Control_Bollard_Stop://won't happen
@@ -503,21 +514,30 @@ void TIM3_IRQHandler(void)   //TIM3中断
 									break;
 							}
 							bottonFlag=0;
-							controlOn=1;
-							controlSource=Botton;//botton
-							TIM_Cmd(TIM2,ENABLE); //
+// 							controlOn=1;
+// 							controlSource=Botton;//botton
+// 							TIM_Cmd(TIM2,ENABLE); //
 						}
 						if(remoteFlag)
 						{
 							switch(remoteValue)
 							{
 								case RemoteUp:
-									BollardControlUp=ControlEnable;
+									if(groundCoilStatus==NoCoilTrigger)
+									{
+										BollardControlUp=ControlEnable;
+										controlOn=1;				
+										controlSource=Remote;//remote
+										TIM_Cmd(TIM2,ENABLE); //
+									}
 									//存SD卡记录，按钮上升记录
 									//Control_Event_Save(Control_Bollard_Up,Top,Botton);
 									break;
 								case RemoteDown:
 									BollardControlDown=ControlEnable;
+									controlOn=1;				
+									controlSource=Remote;//remote
+									TIM_Cmd(TIM2,ENABLE); //
 									//存SD卡记录，按钮下降记录
 									break;
 								case RemoteStop://won't happen
@@ -529,9 +549,9 @@ void TIM3_IRQHandler(void)   //TIM3中断
 									break;
 							}
 							remoteFlag=0;
-							controlOn=1;				
-							controlSource=Remote;//remote
-							TIM_Cmd(TIM2,ENABLE); //
+// 							controlOn=1;				
+// 							controlSource=Remote;//remote
+// 							TIM_Cmd(TIM2,ENABLE); //
 						}
 // 						if(cascadeFlag)
 // 						{
