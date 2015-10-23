@@ -1,9 +1,0 @@
-..\OBJ\portevent.o: ..\HARDWARE\PORT\portevent.c
-..\OBJ\portevent.o: ..\HARDWARE\MODBUS\include\mb.h
-..\OBJ\portevent.o: ..\HARDWARE\PORT\port.h
-..\OBJ\portevent.o: D:\apps\keil\ARM\ARMCC\bin\..\include\assert.h
-..\OBJ\portevent.o: D:\apps\keil\ARM\ARMCC\bin\..\include\inttypes.h
-..\OBJ\portevent.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\OBJ\portevent.o: ..\HARDWARE\MODBUS\include\mbport.h
-..\OBJ\portevent.o: ..\HARDWARE\MODBUS\include\mbproto.h
-..\OBJ\portevent.o: ..\FATFS\src\integer.h
