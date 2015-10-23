@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX 
+-I D:\apps\keil\ARM\RV31\INC 
+-I D:\apps\keil\ARM\CMSIS\Include 
+-I D:\apps\keil\ARM\Inc\ST\STM32F10x 
+-DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\mbfunction.o" --omf_browse "..\OBJ\mbfunction.crf" --depend "..\OBJ\mbfunction.d" "..\HARDWARE\MODBUS\functions\mbfunction.c"

@@ -1,0 +1,14 @@
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\tcp\mbtcp.c
+..\OBJ\mbtcp.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdlib.h
+..\OBJ\mbtcp.o: D:\apps\keil\ARM\ARMCC\bin\..\include\string.h
+..\OBJ\mbtcp.o: ..\HARDWARE\PORT\port.h
+..\OBJ\mbtcp.o: D:\apps\keil\ARM\ARMCC\bin\..\include\assert.h
+..\OBJ\mbtcp.o: D:\apps\keil\ARM\ARMCC\bin\..\include\inttypes.h
+..\OBJ\mbtcp.o: D:\apps\keil\ARM\ARMCC\bin\..\include\stdint.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\include\mb.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\include\mbport.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\include\mbproto.h
+..\OBJ\mbtcp.o: ..\FATFS\src\integer.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\include\mbconfig.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\tcp\mbtcp.h
+..\OBJ\mbtcp.o: ..\HARDWARE\MODBUS\include\mbframe.h
