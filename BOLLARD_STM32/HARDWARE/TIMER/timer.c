@@ -7,6 +7,7 @@
 u8 TimeOut=0;
 u32 timeSliceCnt=0,maxSliceCnt=0;
 u8 alarmOn,controlOn;
+u8 remoteEmergencyStatus=0;
 
 extern u8 bottonPressed;//bottonValue,bollardControlType;
 extern eBollardBottonValue bottonValue;
@@ -256,6 +257,7 @@ void TIM3_IRQHandler(void)   //TIM3ÖÐ¶Ï
 					}
 					else if(remoteValue==RemoteEmergency)
 					{
+						remoteEmergencyStatus=1;
 						BollardControlStop=ControlDisable;
 						BollardControlDown=ControlDisable;
 						BollardControlUp=ControlEnable;
@@ -335,10 +337,12 @@ void TIM3_IRQHandler(void)   //TIM3ÖÐ¶Ï
 							StatusOutput1=1;
 							StatusOutput2=0;
 							break;
+						case TopReached:
 						case UpIng:
 							StatusOutput1=1;
 							StatusOutput2=0;
 							break;
+						case BottomReached:
 						case DownIng:
 							StatusOutput1=0;
 							StatusOutput2=1;							
@@ -347,6 +351,9 @@ void TIM3_IRQHandler(void)   //TIM3ÖÐ¶Ï
 							StatusOutput1=1;//CTL=1,out=0
 							StatusOutput2=1;
 							break;
+						
+						//save status-change event
+						//...
 					}
 				}
 			}

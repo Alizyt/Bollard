@@ -2,6 +2,7 @@
 #include "delay.h"
 
 extern u8 TimeOut;
+extern u8 remoteEmergencyStatus;
 
 /******Control I/O Port Initialization******/
 void ControlFunction_Init(void)
@@ -238,9 +239,11 @@ extern eLimitValue limitValue;
 /******Scan Bollard Status******/
 eBollardStatus Bollard_Status_Scan(void)
 {
-	if(EmergencyUp==StatusTrue) 				return Emergency;
-	else if((BollardUpIng==StatusTrue)||(limitValue==upperLimitReach))		return UpIng;
-	else if((BollardDownIng==StatusTrue)||(limitValue==lowerLimitReach))	return DownIng;
+	if((EmergencyUp==StatusTrue||remoteEmergencyStatus)) 	return Emergency;
+	else if(BollardUpIng==StatusTrue)		return UpIng;
+	else if(BollardDownIng==StatusTrue)	return DownIng;
+	else if(limitValue==upperLimitReach) return TopReached;
+	else if(limitValue==lowerLimitReach) return BottomReached;
 	
 	return NoAction;
 }

@@ -112,35 +112,36 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 			case MB_REG_WRITE:
 //******************************add*******************************************//
 			switch (iRegIndex)
-			{
-				#if remoteOnOff==1
+			{	
 				case 0://control
-					if(usRegHoldingBuf[0]==0x00A0)
-					{
-						//Control_Bollard_Up
-						remoteControl=1;
-						remoteValue=RemoteUp;
-					}
-					else if(usRegHoldingBuf[0]==0x00B0)
-					{
-						//Control_Bollard_Down
-						remoteControl=1;
-						remoteValue=RemoteDown;
-					}
-					else if(usRegHoldingBuf[0]==0x00C0)
-					{
-						//Control_Bollard_Stop
-						remoteControl=1;
-						remoteValue=RemoteStop;
-					}
-					else if(usRegHoldingBuf[0]==0x00D0)
-					{
-						//Emergency
-						remoteControl=1;
-						remoteValue=RemoteEmergency;
-					}
+					#if remoteOnOff==1
+						if(usRegHoldingBuf[0]==0x00A0)
+						{
+							//Control_Bollard_Up
+							remoteControl=1;
+							remoteValue=RemoteUp;
+						}
+						else if(usRegHoldingBuf[0]==0x00B0)
+						{
+							//Control_Bollard_Down
+							remoteControl=1;
+							remoteValue=RemoteDown;
+						}
+						else if(usRegHoldingBuf[0]==0x00C0)
+						{
+							//Control_Bollard_Stop
+							remoteControl=1;
+							remoteValue=RemoteStop;
+						}
+						else if(usRegHoldingBuf[0]==0x00D0)
+						{
+							//Emergency
+							remoteControl=1;
+							remoteValue=RemoteEmergency;
+						}
+					#endif	
 					break;
-				#endif
+				
 				case 1://set max up/down time
 					upDownTime=usRegHoldingBuf[1];
 					TIM2_Int_Init(upDownTime*10000-1,7199);

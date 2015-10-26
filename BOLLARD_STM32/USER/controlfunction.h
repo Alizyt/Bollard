@@ -73,10 +73,12 @@ typedef enum
 
 typedef enum
 {
-	NoAction=0x00,
+	NoAction=0x00,//middle->error state
 	Emergency=0x01,
 	UpIng	=0x02,
-	DownIng=0x03
+	DownIng=0x03,
+	TopReached=0x04,
+	BottomReached=0x05,
 }eBollardStatus;
 
 typedef enum

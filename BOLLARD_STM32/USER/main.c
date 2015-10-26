@@ -82,16 +82,19 @@ int main(void)
 			cascadeChange=True;
 		}
 #endif
-		
+
+#if groundCoilOnOff==1		
 		groundCoilStatus=Ground_Coil_Scan();
-		if(groundCoilStatus && controlOn && (BollardControlUp==ControlEnable))
+		if((bollardStatus!=Emergency) && groundCoilStatus && controlOn && (BollardControlUp==ControlEnable))
 		{
 			BollardControlUp=ControlDisable;
 			controlOn=0;
 			TIM_Cmd(TIM2,DISABLE);
 			TIM_SetCounter(TIM2,0);//
 			//event save
+			
 		}
+#endif
 // 		if(groundCoilStatus)
 // 		{
 // 			coilTrigger=True;
