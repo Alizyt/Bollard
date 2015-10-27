@@ -19,6 +19,12 @@ void Control_Event_Save(eBollardControlType type,eBollardControlStatus status,eB
 	ControlSaveBuf[2]=source;
 	SD_Write_Process(ControlSaveBuf,3,controlEvent);
 }
+void Status_Event_Save(eBollardStatus status)
+{
+	u8 StatusSave;
+	StatusSave=status;
+	SD_Write_Process(&StatusSave,1,statusEvent);
+}
 void Error_Event_Save(eErrorEventType type,eBollardControlSource source)
 {
 	u8 ErrorSaveBuf[64];

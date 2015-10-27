@@ -353,7 +353,7 @@ void TIM3_IRQHandler(void)   //TIM3ÖÐ¶Ï
 							break;
 						
 						//save status-change event
-						//...
+						Status_Event_Save(bollardStatus);
 					}
 				}
 			}

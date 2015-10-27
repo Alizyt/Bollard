@@ -92,6 +92,7 @@ typedef enum
 {
 	powerEvent,
 	controlEvent,
+	statusEvent,
 	errorEvent,
 	settingEvent
 }eEventType;
@@ -116,7 +117,8 @@ typedef enum
 	slideTimeSet=0x01,
 	groundCoilSet=0x02,
 	synchroSet=0x03,
-	remoteSet=0x04
+	remoteSet=0x04,
+	timeSet=0x05
 }eSettingEventType;
 
 // u8 bottonPressed=0;//bottonValue=0,bollardControlType;

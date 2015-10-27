@@ -39,3 +39,4 @@
 ..\OBJ\port.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\OBJ\port.o: ..\HARDWARE\TIMER\timer.h
 ..\OBJ\port.o: ..\HARDWARE\SD\recordmanage.h
+..\OBJ\port.o: ..\HARDWARE\RTC\rtc.h

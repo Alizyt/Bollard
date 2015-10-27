@@ -5,6 +5,7 @@
 
 void Power_Event_Save(ePowerEventType type);
 void Control_Event_Save(eBollardControlType type,eBollardControlStatus status,eBollardControlSource source);
+void Status_Event_Save(eBollardStatus status);
 void Error_Event_Save(eErrorEventType type,eBollardControlSource source);
 void Setting_Event_Save(eSettingEventType type,unsigned short int* regbuf,u8 regcount);
 u8 Event_Read(eEventType type,u32 recordindx);

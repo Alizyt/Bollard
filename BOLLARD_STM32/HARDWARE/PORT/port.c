@@ -9,6 +9,7 @@
 // #include "..\..\include\systick.h"
 #include "timer.h"
 #include "recordmanage.h"
+#include "rtc.h"
 
  unsigned short int  usRegInputBuf[10]={0x0000,0xfe02,0x1203,0x1304,0x1405,0x1506,0x1607,0x1708,0x1809};
  unsigned short int *usRegHoldingBuf=usRegInputBuf;        //一个测试用的 寄存器数组 地址0-7
@@ -113,6 +114,7 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 //******************************add*******************************************//
 			switch (iRegIndex)
 			{	
+				//notice!!! usRegHoldingBuf[]=>unsigned short int, need transform???test!!!
 				case 0://control
 					#if remoteOnOff==1
 						if(usRegHoldingBuf[0]==0x00A0)
@@ -158,15 +160,23 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 					//存设置记录
 					Setting_Event_Save(groundCoilSet,&usRegHoldingBuf[iRegIndex],1);
 					break;
-				case 4:
+				case 4://set synchroOnoff
 					synchroOnOff=usRegHoldingBuf[4];
 					//存设置记录
 					Setting_Event_Save(synchroSet,&usRegHoldingBuf[iRegIndex],1);
 					break;
-				case 5:
+				case 5://set remoteOnOff
 					remoteOnOff=usRegHoldingBuf[5];
 					//存设置记录
 					Setting_Event_Save(remoteSet,&usRegHoldingBuf[iRegIndex],1);
+					break;
+				case 6://set time, 6 regs
+					RTC_Set(usRegHoldingBuf[6],usRegHoldingBuf[7],usRegHoldingBuf[8],usRegHoldingBuf[9],usRegHoldingBuf[10],usRegHoldingBuf[11]);
+					//存设置记录
+					Setting_Event_Save(timeSet,&usRegHoldingBuf[iRegIndex],6);
+					break;
+				case 12:
+					//...
 					break;
 			}
 //******************************add*******************************************//
