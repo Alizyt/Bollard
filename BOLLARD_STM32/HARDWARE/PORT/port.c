@@ -98,7 +98,9 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 
 		switch ( eMode )
 		{
-			//读处理函数 
+			//读处理函数(read record and status) 
+			//step1: read data from sdcard
+			//step2: copy the matched data to usRegHoldingBuf[iRegIndex]
 			case MB_REG_READ:
 			while( usNRegs > 0 )
 			{
@@ -111,6 +113,13 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 
 			//写处理函数 
 			case MB_REG_WRITE:
+			while( usNRegs > 0 )
+			{
+				usRegHoldingBuf[iRegIndex] = *pucRegBuffer++ << 8;
+				usRegHoldingBuf[iRegIndex] |= *pucRegBuffer++;
+				iRegIndex++;
+				usNRegs--;
+			}
 //******************************add*******************************************//
 			switch (iRegIndex)
 			{	
@@ -180,13 +189,6 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 					break;
 			}
 //******************************add*******************************************//
-			while( usNRegs > 0 )
-			{
-				usRegHoldingBuf[iRegIndex] = *pucRegBuffer++ << 8;
-				usRegHoldingBuf[iRegIndex] |= *pucRegBuffer++;
-				iRegIndex++;
-				usNRegs--;
-			}
 			break;
 		}
 	}

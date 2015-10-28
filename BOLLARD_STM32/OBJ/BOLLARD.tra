@@ -78,7 +78,7 @@
 ### ADS-LD Output File: '..\OBJ\BOLLARD.axf'
 ### ADS-LD Command File: '..\OBJ\BOLLARD.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile '..\OBJ\BOLLARD.lnp', Handle=0x00001090
+### Creating CmdFile '..\OBJ\BOLLARD.lnp', Handle=0x00000D08
 ### Writing '.lnp' file
 ### ADS-LD Command file '..\OBJ\BOLLARD.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

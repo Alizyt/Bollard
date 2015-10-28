@@ -204,6 +204,10 @@ void TIM3_IRQHandler(void)   //TIM3中断
 				if(bottonPressed)
 				{
 					bottonPressed=0;
+					if(remoteFlag)	//priority: botton>remote>synchro
+						remoteFlag=0;
+					if(cascadeChange)
+						cascadeChange=0;
 					TIM_Cmd(TIM2,DISABLE); //否则连按计时不对
 					TIM_SetCounter(TIM2,0);
 					//stop立即动作
@@ -237,47 +241,52 @@ void TIM3_IRQHandler(void)   //TIM3中断
 				}
 				if(remoteControl)
 				{
-					remoteControl=0;	
-					TIM_Cmd(TIM2,DISABLE); //否则连按计时不对
-					TIM_SetCounter(TIM2,0);
-					//stop、emergency立即动作
-					if(remoteValue==RemoteStop)
+					remoteControl=0;
+					if(cascadeChange)
+						cascadeChange=0;
+					if(bottonFlag!=1)	//priority: botton>remote>synchro
 					{
-						BollardControlStop=ControlEnable;
-						BollardControlUp=ControlDisable;
-						BollardControlDown=ControlDisable;
-						controlOn=1;
-						controlSource=Remote;//remote
-						if(alarmOn==1)
+						TIM_Cmd(TIM2,DISABLE); //否则连按计时不对
+						TIM_SetCounter(TIM2,0);
+						//stop、emergency立即动作
+						if(remoteValue==RemoteStop)
 						{
-							AlarmControl=ControlDisable;
-							alarmOn=0;
+							BollardControlStop=ControlEnable;
+							BollardControlUp=ControlDisable;
+							BollardControlDown=ControlDisable;
+							controlOn=1;
+							controlSource=Remote;//remote
+							if(alarmOn==1)
+							{
+								AlarmControl=ControlDisable;
+								alarmOn=0;
+							}
+							TIM_Cmd(TIM2,ENABLE);
 						}
-						TIM_Cmd(TIM2,ENABLE);
-					}
-					else if(remoteValue==RemoteEmergency)
-					{
-						remoteEmergencyStatus=1;
-						BollardControlStop=ControlDisable;
-						BollardControlDown=ControlDisable;
-						BollardControlUp=ControlEnable;
-						AlarmControl=ControlEnable;
-						controlOn=1;
-						controlSource=Remote;
-						TIM_Cmd(TIM2,ENABLE); 
-					}
-					//up、down先预警再动作
-					else
-					{
-						remoteFlag=1;
-						BollardControlStop=ControlDisable;
-						BollardControlUp=ControlDisable;
-						BollardControlDown=ControlDisable;
-						if(controlOn==1)
-							controlOn=0;
-						AlarmControl=ControlEnable;
-						alarmOn=1;
-						maxSliceCnt=0;//开始计时
+						else if(remoteValue==RemoteEmergency)
+						{
+							remoteEmergencyStatus=1;
+							BollardControlStop=ControlDisable;
+							BollardControlDown=ControlDisable;
+							BollardControlUp=ControlEnable;
+							AlarmControl=ControlEnable;
+							controlOn=1;
+							controlSource=Remote;
+							TIM_Cmd(TIM2,ENABLE); 
+						}
+						//up、down先预警再动作
+						else
+						{
+							remoteFlag=1;
+							BollardControlStop=ControlDisable;
+							BollardControlUp=ControlDisable;
+							BollardControlDown=ControlDisable;
+							if(controlOn==1)
+								controlOn=0;
+							AlarmControl=ControlEnable;
+							alarmOn=1;
+							maxSliceCnt=0;//开始计时
+						}
 					}
 				}
 				if(cascadeChange)
@@ -286,7 +295,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 					//cascadeFlag=1;
 					//AlarmControl=ControlEnable;
 					//alarmOn=1;
-					if(bottonFlag!=1)
+					if((bottonFlag!=1)&&(remoteFlag!=1))
 					{
 						TIM_Cmd(TIM2,DISABLE);
 						TIM_SetCounter(TIM2,0);						
@@ -525,7 +534,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 // 							controlSource=Botton;//botton
 // 							TIM_Cmd(TIM2,ENABLE); //
 						}
-						if(remoteFlag)
+						else if(remoteFlag)
 						{
 							switch(remoteValue)
 							{
