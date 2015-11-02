@@ -102,6 +102,23 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 			//step1: read data from sdcard
 			//step2: copy the matched data to usRegHoldingBuf[iRegIndex]
 			case MB_REG_READ:
+//******************************add*******************************************//
+			switch(iRegIndex)
+			{
+				case 12:
+					Event_Read(powerEvent,1,&usRegHoldingBuf[12]);
+					break;
+				case 21:
+					Event_Read(controlEvent,1,&usRegHoldingBuf[21]);
+					break;
+				case 32:
+					Event_Read(statusEvent,1,&usRegHoldingBuf[32]);
+					break;
+				case 41:
+					Event_Read(errorEvent,1,&usRegHoldingBuf[41]);
+					break;
+			}
+//******************************add*******************************************//
 			while( usNRegs > 0 )
 			{
 				*pucRegBuffer++ = ( uint8_t )( usRegHoldingBuf[iRegIndex] >> 8 );
@@ -125,7 +142,8 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 			{	
 				//notice!!! usRegHoldingBuf[]=>unsigned short int, need transform???test!!!
 				case 0://control
-					#if remoteOnOff==1
+					if(remoteOnOff==1)
+					{
 						if(usRegHoldingBuf[0]==0x00A0)
 						{
 							//Control_Bollard_Up
@@ -150,7 +168,7 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 							remoteControl=1;
 							remoteValue=RemoteEmergency;
 						}
-					#endif	
+					}	
 					break;
 				
 				case 1://set max up/down time

@@ -40,23 +40,40 @@ void Setting_Event_Save(eSettingEventType type,unsigned short int* regbuf,u8 reg
 		SettingSaveBuf[i+1]=(*regbuf++);
 	SD_Write_Process(SettingSaveBuf,regcount+1,settingEvent);
 }
-u8 Event_Read(eEventType type,u32 recordindx)
+u8 Event_Read(eEventType type,u32 recordindx,unsigned short int* recordDataOuthex)
 {
+	u8 i,length;
 	u8 recordDataOut[32];
+	u8* recordDataOutAddr=recordDataOut;
+	//u8 recordDataOuthex[16];
 	switch(type)
 	{
 		case powerEvent:
-			read_file(recordDataOut,recordindx,18,"POWER");
+			length=18;
+			read_file(recordDataOut,recordindx,length,"POWER");
 			break;
 		case controlEvent:
-			read_file(recordDataOut,recordindx,22,"BOLLARD");
+			length=22;
+			read_file(recordDataOut,recordindx,length,"BOLLARD");
+			break;
+		case statusEvent:
+			length=18;
+			read_file(recordDataOut,recordindx,length,"STATUS");
 			break;
 		case errorEvent:
-			read_file(recordDataOut,recordindx,20,"ERROR");
+			length=20;
+			read_file(recordDataOut,recordindx,length,"ERROR");
 			break;
+// 		case settingEvent:
+// 			read_file(recordDataOut,recordindx,??,"SETTING");
+// 			break;
 	}
 	//...recordDataOut×ª´æ
-
+	for(i=0;i<(length/2);i++)
+	{
+		(*recordDataOuthex++)=asciitohex(recordDataOutAddr);
+		recordDataOutAddr+=2;
+	}
 	return 0;//
 }
 
@@ -84,8 +101,14 @@ void SD_Write_Process(u8* pucFrame,u16 len,eEventType type)
 		case controlEvent:
 			write_file(sdFrameascii,1,2*len,"BOLLARD");
 			break;
+		case statusEvent:
+			write_file(sdFrameascii,1,2*len,"STATUS");
+			break;
 		case errorEvent:
 			write_file(sdFrameascii,1,2*len,"ERROR");
+			break;
+		case settingEvent:
+			write_file(sdFrameascii,1,2*len,"SETTING");
 			break;
 	}
 }
@@ -125,7 +148,7 @@ void SD_Process(u8* pucFrame,u16 len,u8 type)
 	}
 }
 
-u8 asciitohex(u32* ascii_adr)
+u8 asciitohex(u8* ascii_adr)
 {
 	u8 hexr;
 	//if((USART_RX_BUF[ascii_adr]>='0')&&(USART_RX_BUF[ascii_adr]<='9')) 
