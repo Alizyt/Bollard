@@ -50,3 +50,4 @@
 ..\OBJ\init.o: ..\HARDWARE\SD\mmc_sd.h
 ..\OBJ\init.o: controlfunction.h
 ..\OBJ\init.o: ..\HARDWARE\SD\recordmanage.h
+..\OBJ\init.o: ..\HARDWARE\EXTI\exti.h

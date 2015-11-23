@@ -2,6 +2,7 @@
 #include "init.h"
 #include "fattester.h"
 #include "controlfunction.h"
+#include "recordmanage.h"
 
 #define True  1
 #define False 0
@@ -21,6 +22,7 @@ eGroundCoilStatus groundCoilStatus;
 
 u8 groundCoilOnOff=1,synchroOnOff=1,remoteOnOff=1;
 
+extern u8 controllerAddr;
 extern u8 controlOn;
 
 int main(void)
@@ -28,7 +30,6 @@ int main(void)
 	systemInit();
 	
 	TIM_Cmd(TIM3, ENABLE);
-
 	//Æô¶¯FreeModbus
 	eMBEnable();
 	while(1)

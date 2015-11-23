@@ -37,11 +37,11 @@ void ControlFunction_Init(void)
 	//
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_7|GPIO_Pin_4|GPIO_Pin_5;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_0|GPIO_Pin_1;
+	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);	
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_4|GPIO_Pin_5;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);	
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_8;
+	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_8|GPIO_Pin_11;
 	GPIO_Init(GPIOD, &GPIO_InitStructure);	
 	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_2|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
 	GPIO_Init(GPIOE, &GPIO_InitStructure);	
@@ -250,8 +250,9 @@ eBollardStatus Bollard_Status_Scan(void)
 
 eGroundCoilStatus Ground_Coil_Scan(void)
 {
-	if(GroundCoilFront==CoilTrue) return CoilFrontTrigger;
-	else if(GroundCoilRear==CoilTrue) return CoilRearTrigger;
+	//if(GroundCoilFront==CoilTrue) return CoilFrontTrigger;
+	//else if(GroundCoilRear==CoilTrue) return CoilRearTrigger;
+	if(GroundCoil==CoilTrue) return CoilTrigger;
 	
 	return NoCoilTrigger;
 }

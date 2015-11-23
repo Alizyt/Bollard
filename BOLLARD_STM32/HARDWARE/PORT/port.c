@@ -12,10 +12,11 @@
 #include "rtc.h"
 
  unsigned short int  usRegInputBuf[10]={0x0000,0xfe02,0x1203,0x1304,0x1405,0x1506,0x1607,0x1708,0x1809};
- unsigned short int *usRegHoldingBuf=usRegInputBuf;        //一个测试用的 寄存器数组 地址0-7
-
- unsigned char REG_INPUT_START=0x00,REG_HOLDING_START=0x10;//寄存器起始地址
- unsigned char REG_INPUT_NREGS=12,REG_HOLDING_NREGS=12;//寄存器个数
+ //unsigned short int *usRegHoldingBuf=usRegInputBuf;        //一个测试用的 寄存器数组 地址0-7
+ unsigned short int  usRegHoldingBuf[64];
+ 
+ unsigned char REG_INPUT_START=0x00,REG_HOLDING_START=0x00;//寄存器起始地址
+ unsigned char REG_INPUT_NREGS=12,REG_HOLDING_NREGS=64;//寄存器个数
  unsigned char usRegInputStart=0,usRegHoldingStart=0;//
  
  unsigned char REG_COILS_START=0x20,REG_DISCRETE_START=0x30;
@@ -87,7 +88,7 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 	//错误状态
 	eMBErrorCode eStatus = MB_ENOERR;
 	//偏移量
-	int16_t iRegIndex;
+	int16_t iRegIndex, iRegIndexCp;
 
 	//判断寄存器是不是在范围内
 	if( ( (int16_t)usAddress >= REG_HOLDING_START ) \
@@ -95,7 +96,7 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 	{
 		//计算偏移量
 		iRegIndex = ( int16_t )( usAddress - REG_HOLDING_START );
-
+		iRegIndexCp = iRegIndex;
 		switch ( eMode )
 		{
 			//读处理函数(read record and status) 
@@ -105,17 +106,17 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 //******************************add*******************************************//
 			switch(iRegIndex)
 			{
-				case 12:
-					Event_Read(powerEvent,1,&usRegHoldingBuf[12]);
+				case 13:
+					Event_Read(powerEvent,1,&usRegHoldingBuf[13]);
 					break;
-				case 21:
-					Event_Read(controlEvent,1,&usRegHoldingBuf[21]);
+				case 22:
+					Event_Read(controlEvent,1,&usRegHoldingBuf[22]);
 					break;
-				case 32:
-					Event_Read(statusEvent,1,&usRegHoldingBuf[32]);
+				case 33:
+					Event_Read(statusEvent,1,&usRegHoldingBuf[33]);
 					break;
-				case 41:
-					Event_Read(errorEvent,1,&usRegHoldingBuf[41]);
+				case 42:
+					Event_Read(errorEvent,1,&usRegHoldingBuf[42]);
 					break;
 			}
 //******************************add*******************************************//
@@ -138,31 +139,31 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 				usNRegs--;
 			}
 //******************************add*******************************************//
-			switch (iRegIndex)
+			switch (iRegIndexCp)
 			{	
 				//notice!!! usRegHoldingBuf[]=>unsigned short int, need transform???test!!!
-				case 0://control
+				case 1://control
 					if(remoteOnOff==1)
 					{
-						if(usRegHoldingBuf[0]==0x00A0)
+						if(usRegHoldingBuf[1]==0x00A0)
 						{
 							//Control_Bollard_Up
 							remoteControl=1;
 							remoteValue=RemoteUp;
 						}
-						else if(usRegHoldingBuf[0]==0x00B0)
+						else if(usRegHoldingBuf[1]==0x00B0)
 						{
 							//Control_Bollard_Down
 							remoteControl=1;
 							remoteValue=RemoteDown;
 						}
-						else if(usRegHoldingBuf[0]==0x00C0)
+						else if(usRegHoldingBuf[1]==0x00C0)
 						{
 							//Control_Bollard_Stop
 							remoteControl=1;
 							remoteValue=RemoteStop;
 						}
-						else if(usRegHoldingBuf[0]==0x00D0)
+						else if(usRegHoldingBuf[1]==0x00D0)
 						{
 							//Emergency
 							remoteControl=1;
@@ -171,38 +172,38 @@ eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegi
 					}	
 					break;
 				
-				case 1://set max up/down time
-					upDownTime=usRegHoldingBuf[1];
+				case 2://set max up/down time
+					upDownTime=usRegHoldingBuf[2];
 					TIM2_Int_Init(upDownTime*10000-1,7199);
 					//存设置记录
-					Setting_Event_Save(upDownTimeSet,&usRegHoldingBuf[iRegIndex],1);
+					Setting_Event_Save(upDownTimeSet,&usRegHoldingBuf[iRegIndexCp],1);
 					break;
-				case 2://set slidedown time
-					slideTime=usRegHoldingBuf[2];
+				case 3://set slidedown time
+					slideTime=usRegHoldingBuf[3];
 					//存设置记录
-					Setting_Event_Save(slideTimeSet,&usRegHoldingBuf[iRegIndex],1);
+					Setting_Event_Save(slideTimeSet,&usRegHoldingBuf[iRegIndexCp],1);
 					break;
-				case 3://set groundCoilOnOff
-					groundCoilOnOff=usRegHoldingBuf[3];
+				case 4://set groundCoilOnOff
+					groundCoilOnOff=usRegHoldingBuf[4];
 					//存设置记录
-					Setting_Event_Save(groundCoilSet,&usRegHoldingBuf[iRegIndex],1);
+					Setting_Event_Save(groundCoilSet,&usRegHoldingBuf[iRegIndexCp],1);
 					break;
-				case 4://set synchroOnoff
-					synchroOnOff=usRegHoldingBuf[4];
+				case 5://set synchroOnoff
+					synchroOnOff=usRegHoldingBuf[5];
 					//存设置记录
-					Setting_Event_Save(synchroSet,&usRegHoldingBuf[iRegIndex],1);
+					Setting_Event_Save(synchroSet,&usRegHoldingBuf[iRegIndexCp],1);
 					break;
-				case 5://set remoteOnOff
-					remoteOnOff=usRegHoldingBuf[5];
+				case 6://set remoteOnOff
+					remoteOnOff=usRegHoldingBuf[6];
 					//存设置记录
-					Setting_Event_Save(remoteSet,&usRegHoldingBuf[iRegIndex],1);
+					Setting_Event_Save(remoteSet,&usRegHoldingBuf[iRegIndexCp],1);
 					break;
-				case 6://set time, 6 regs
-					RTC_Set(usRegHoldingBuf[6],usRegHoldingBuf[7],usRegHoldingBuf[8],usRegHoldingBuf[9],usRegHoldingBuf[10],usRegHoldingBuf[11]);
+				case 7://set time, 6 regs
+					RTC_Set(usRegHoldingBuf[7],usRegHoldingBuf[8],usRegHoldingBuf[9],usRegHoldingBuf[10],usRegHoldingBuf[11],usRegHoldingBuf[12]);
 					//存设置记录
-					Setting_Event_Save(timeSet,&usRegHoldingBuf[iRegIndex],6);
+					Setting_Event_Save(timeSet,&usRegHoldingBuf[iRegIndexCp],6);
 					break;
-				case 12:
+				case 13:
 					//...
 					break;
 			}

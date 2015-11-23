@@ -91,7 +91,7 @@ void RS485_Init(u32 bound)
 
  #endif
 
- RS485_TX_EN=0;			//默认为接收模式
+ RS485_TX_EN=1;			//默认为接收模式（经过光耦，逻辑反）
 }
 
 //RS485发送len个字节.

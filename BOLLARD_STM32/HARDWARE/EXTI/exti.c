@@ -2,7 +2,8 @@
 #include "delay.h"
 #include "controlfunction.h"  
 #include "recordmanage.h"
-			 
+//#include "timer.h"
+
 _calendar_obj slideCalendarPre1,slideCalendarPre2,slideCalendarPre3;	//日历结构体
 u8 slideTime=24;//下滑延时，可设置，小时为单位
 extern u8 controlOn;
@@ -41,7 +42,7 @@ void EXTIX_Init(void)
 		GPIO_EXTILineConfig(GPIO_PortSourceGPIOC,GPIO_PinSource5);
 		EXTI_InitStructure.EXTI_Line = EXTI_Line5;//UpperLimit1
 		EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-		EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+		EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
 		EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 		EXTI_Init(&EXTI_InitStructure);	 	//根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 		
@@ -96,7 +97,7 @@ void EXTI9_5_IRQHandler(void)
 			BollardControlUp=ControlEnable;
 			controlOn=1;
 			controlSource=Bollard1;
-			maxSliceCnt=0;
+			TIM_Cmd(TIM2,ENABLE);
 			//SD卡记录1号液压柱下滑事件
 			Error_Event_Save(slideDown,Bollard1);
 			//当前时间-上次下滑时间<下滑延时，警报
@@ -116,7 +117,7 @@ void EXTI9_5_IRQHandler(void)
 			BollardControlUp=ControlEnable;
 			controlOn=1;
 			controlSource=Bollard2;
-			maxSliceCnt=0;
+			TIM_Cmd(TIM2,ENABLE);
 			//SD卡记录2号液压柱下滑事件
 			Error_Event_Save(slideDown,Bollard2);
 			//当前时间-上次下滑时间<下滑延时，警报
@@ -141,7 +142,7 @@ void EXTI15_10_IRQHandler(void)
 			BollardControlUp=ControlEnable;
 			controlOn=1;
 			controlSource=Bollard3;
-			maxSliceCnt=0;
+			TIM_Cmd(TIM2,ENABLE);
 			//SD卡记录3号液压柱下滑事件
 			Error_Event_Save(slideDown,Bollard3);
 			//当前时间-上次下滑时间<下滑延时，警报

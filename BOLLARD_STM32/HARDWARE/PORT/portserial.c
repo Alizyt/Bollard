@@ -28,14 +28,14 @@ vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 		//使能接收和接收中断
 		USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
 		//MAX485操作 低电平为接收模式
-		RS485_TX_EN=0;
+		RS485_TX_EN=1;
 		//GPIO_ResetBits(GPIOD,GPIO_Pin_8);
 	}
 	else
 	{
 		USART_ITConfig(USART2, USART_IT_RXNE, DISABLE); 
 		//MAX485操作 高电平为发送模式
-		RS485_TX_EN=1;
+		RS485_TX_EN=0;
 		//GPIO_SetBits(GPIOD,GPIO_Pin_8);
 	}
 

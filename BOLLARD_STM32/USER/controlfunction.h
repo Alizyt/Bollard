@@ -84,17 +84,18 @@ typedef enum
 typedef enum
 {
 	NoCoilTrigger=0x00,
-	CoilFrontTrigger=0x01,
-	CoilRearTrigger=0x02
+	CoilFrontTrigger=0x01,//edit and remove
+	CoilRearTrigger=0x02,//edit and remove
+	CoilTrigger=0x03
 }eGroundCoilStatus;
 
 typedef enum
 {
-	powerEvent,
-	controlEvent,
-	statusEvent,
-	errorEvent,
-	settingEvent
+	powerEvent=0x00,
+	controlEvent=0x01,
+	statusEvent=0x02,
+	errorEvent=0x03,
+	settingEvent=0x04
 }eEventType;
 
 typedef enum
@@ -175,8 +176,8 @@ typedef enum
 #define AlarmControl				PDout(10)
 //#define AlarmControlPre 		PAout(2)
 //#define AlarmControlIng			PAout(2)
-#define StatusOutput1				PEout(3)
-#define StatusOutput2				PEout(4)
+#define StatusOutput1				PEout(4)//
+#define StatusOutput2				PEout(3)//
 /******Botton Control && Statuas Input Definition (CPU input)******/
 #define BollardBottonUp 		PBin(2)
 #define BollardBottonDown 	PEin(7)
@@ -196,10 +197,16 @@ typedef enum
 #define BollardUpIng				PEin(13)
 #define BollardDownIng			PBin(1)
 
-#define GroundCoilFront			PAin(5)
-#define GroundCoilRear			PAin(4)
+//#define GroundCoilFront			PAin(5)
+//#define GroundCoilRear			PAin(4)
+#define GroundCoil					PDin(11)
 
 #define MXOF								PEin(2)
+
+#define ADDR1								PBin(4)
+#define ADDR2								PBin(5)
+#define ADDR3								PBin(6)
+#define ADDR4								PBin(7)
 
 void ControlFunction_Init(void);
 u8 Bollard_Control(eBollardControlType type,eBollardControlSource source);

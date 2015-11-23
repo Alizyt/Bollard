@@ -9,7 +9,8 @@ void Power_Event_Save(ePowerEventType type)
 {
 	u8 PowerSaveBuf[64];
 	PowerSaveBuf[0]=type;
-	SD_Write_Process(PowerSaveBuf,1,powerEvent);
+	PowerSaveBuf[1]=0x00;
+	SD_Write_Process(PowerSaveBuf,2,powerEvent);
 }
 void Control_Event_Save(eBollardControlType type,eBollardControlStatus status,eBollardControlSource source)
 {
@@ -21,9 +22,10 @@ void Control_Event_Save(eBollardControlType type,eBollardControlStatus status,eB
 }
 void Status_Event_Save(eBollardStatus status)
 {
-	u8 StatusSave;
-	StatusSave=status;
-	SD_Write_Process(&StatusSave,1,statusEvent);
+	u8 StatusSave[64];
+	StatusSave[0]=status;
+	StatusSave[1]=0x00;
+	SD_Write_Process(StatusSave,2,statusEvent);
 }
 void Error_Event_Save(eErrorEventType type,eBollardControlSource source)
 {
@@ -42,38 +44,38 @@ void Setting_Event_Save(eSettingEventType type,unsigned short int* regbuf,u8 reg
 }
 u8 Event_Read(eEventType type,u32 recordindx,unsigned short int* recordDataOuthex)
 {
-	u8 i,length;
-	u8 recordDataOut[32];
-	u8* recordDataOutAddr=recordDataOut;
-	//u8 recordDataOuthex[16];
-	switch(type)
-	{
-		case powerEvent:
-			length=18;
-			read_file(recordDataOut,recordindx,length,"POWER");
-			break;
-		case controlEvent:
-			length=22;
-			read_file(recordDataOut,recordindx,length,"BOLLARD");
-			break;
-		case statusEvent:
-			length=18;
-			read_file(recordDataOut,recordindx,length,"STATUS");
-			break;
-		case errorEvent:
-			length=20;
-			read_file(recordDataOut,recordindx,length,"ERROR");
-			break;
-// 		case settingEvent:
-// 			read_file(recordDataOut,recordindx,??,"SETTING");
+// 	u8 i,length;
+// 	u8 recordDataOut[32];
+// 	u8* recordDataOutAddr=recordDataOut;
+// 	//u8 recordDataOuthex[16];
+// 	switch(type)
+// 	{
+// 		case powerEvent:
+// 			length=18;
+// 			read_file(recordDataOut,recordindx,length,"POWER");
 // 			break;
-	}
-	//...recordDataOut×ª´æ
-	for(i=0;i<(length/2);i++)
-	{
-		(*recordDataOuthex++)=asciitohex(recordDataOutAddr);
-		recordDataOutAddr+=2;
-	}
+// 		case controlEvent:
+// 			length=22;
+// 			read_file(recordDataOut,recordindx,length,"BOLLARD");
+// 			break;
+// 		case statusEvent:
+// 			length=18;
+// 			read_file(recordDataOut,recordindx,length,"STATUS");
+// 			break;
+// 		case errorEvent:
+// 			length=20;
+// 			read_file(recordDataOut,recordindx,length,"ERROR");
+// 			break;
+// // 		case settingEvent:
+// // 			read_file(recordDataOut,recordindx,??,"SETTING");
+// // 			break;
+// 	}
+// 	//...recordDataOut×ª´æ
+// 	for(i=0;i<(length/2);i++)
+// 	{
+// 		(*recordDataOuthex++)=asciitohex(recordDataOutAddr);
+// 		recordDataOutAddr+=2;
+// 	}
 	return 0;//
 }
 
@@ -96,19 +98,20 @@ void SD_Write_Process(u8* pucFrame,u16 len,eEventType type)
 	switch(type)
 	{
 		case powerEvent:
-			write_file(sdFrameascii,1,2*len,"POWER");
+			write_file(sdFrameascii,1,2*len,"zzz");		
+			write_file(sdFrameascii,1,2*len,"pow");
 			break;
 		case controlEvent:
-			write_file(sdFrameascii,1,2*len,"BOLLARD");
+			write_file(sdFrameascii,1,2*len,"bol");
 			break;
 		case statusEvent:
-			write_file(sdFrameascii,1,2*len,"STATUS");
+			write_file(sdFrameascii,1,2*len,"sta");
 			break;
 		case errorEvent:
-			write_file(sdFrameascii,1,2*len,"ERROR");
+			write_file(sdFrameascii,1,2*len,"err");
 			break;
 		case settingEvent:
-			write_file(sdFrameascii,1,2*len,"SETTING");
+			write_file(sdFrameascii,1,2*len,"set");
 			break;
 	}
 }
@@ -117,35 +120,35 @@ void SD_Write_Process(u8* pucFrame,u16 len,eEventType type)
 //test
 void SD_Process(u8* pucFrame,u16 len,u8 type)
 {
-	u8 i;
-//	u8 sdFramehex[256];
-	u8 sdFrameascii[512];
-	u8* sdFrameasciiAdr=sdFrameascii;
-	
-// 	for(i=0;i<len;i++)
+// 	u8 i;
+// //	u8 sdFramehex[256];
+// 	u8 sdFrameascii[512];
+// 	u8* sdFrameasciiAdr=sdFrameascii;
+// 	
+// // 	for(i=0;i<len;i++)
+// // 	{
+// // 		sdFramehex[i]=*(pucFrame+i);
+// // 	}
+// 	switch(type)
 // 	{
-// 		sdFramehex[i]=*(pucFrame+i);
+// 		case MB_FUNC_WRITE_MULTIPLE_REGISTERS:
+// 		{
+// // 			sdFramehex[len]=calendar.w_year%256;
+// // 			sdFramehex[len+1]=calendar.w_year/256;
+// // 			sdFramehex[len+2]=calendar.w_month;
+// // 			sdFramehex[len+3]=calendar.w_date;
+// // 			sdFramehex[len+4]=calendar.hour;
+// // 			sdFramehex[len+5]=calendar.min;
+// // 			sdFramehex[len+6]=calendar.sec;
+// 			for(i=0;i<len;i++)
+// 			{
+// 				hextoascii(sdFrameasciiAdr,*pucFrame++);
+// 				sdFrameasciiAdr+=2;
+// 			}
+// 			write_file(sdFrameascii,1,2*len,"BOLLARD");
+// 			break;
+// 		}
 // 	}
-	switch(type)
-	{
-		case MB_FUNC_WRITE_MULTIPLE_REGISTERS:
-		{
-// 			sdFramehex[len]=calendar.w_year%256;
-// 			sdFramehex[len+1]=calendar.w_year/256;
-// 			sdFramehex[len+2]=calendar.w_month;
-// 			sdFramehex[len+3]=calendar.w_date;
-// 			sdFramehex[len+4]=calendar.hour;
-// 			sdFramehex[len+5]=calendar.min;
-// 			sdFramehex[len+6]=calendar.sec;
-			for(i=0;i<len;i++)
-			{
-				hextoascii(sdFrameasciiAdr,*pucFrame++);
-				sdFrameasciiAdr+=2;
-			}
-			write_file(sdFrameascii,1,2*len,"BOLLARD");
-			break;
-		}
-	}
 }
 
 u8 asciitohex(u8* ascii_adr)

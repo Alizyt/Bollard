@@ -308,11 +308,11 @@ void write_file(u8 *buf,u32 index,u32 size,char *type)
 
 	f_mkdir(filepath);
 	f_open(file,filename,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
-	if(f_size(file)>4096)
-	{
-		f_unlink(filename);
-		f_open(file,filename,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
-	}
+// 	if(f_size(file)>4096)
+// 	{
+// 		f_unlink(filename);
+// 		f_open(file,filename,FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
+// 	}
 	f_lseek(file,f_size(file));
 	f_write(file,"\r\n",2,&bw);
 	f_write(file,buf,size+14,&bw);

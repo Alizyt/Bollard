@@ -41,3 +41,4 @@
 ..\OBJ\main.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\OBJ\main.o: ..\STM32F10x_FWLib\inc\misc.h
 ..\OBJ\main.o: controlfunction.h
+..\OBJ\main.o: ..\HARDWARE\SD\recordmanage.h

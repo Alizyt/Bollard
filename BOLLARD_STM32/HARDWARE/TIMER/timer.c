@@ -83,6 +83,7 @@ void TIM2_IRQHandler(void)
 							Control_Event_Save(Control_Bollard_Down,DownTimeout,controlSource);
 							break;
 						case Control_Bollard_Stop:
+							bottonFlag=0;//
 							BollardControlStop=ControlDisable;
 							break;
 					}
@@ -102,6 +103,7 @@ void TIM2_IRQHandler(void)
 							Control_Event_Save(Control_Bollard_Down,DownTimeout,controlSource);
 							break;
 						case RemoteStop:
+							remoteFlag=0;//
 							BollardControlStop=ControlDisable;
 							break;
 						case RemoteEmergency:
@@ -195,7 +197,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)  //检查TIM3更新中断发生与否
 		{
-			TIM_ClearITPendingBit(TIM3, TIM_IT_Update  );  //清除TIMx更新中断标志 	
+			TIM_ClearITPendingBit(TIM3, TIM_IT_Update);  //清除TIMx更新中断标志 	
 			//TimeOut=1;
 			//TIM_Cmd(TIM3, DISABLE);  //使能TIMx	
 			timeSliceCnt++;
@@ -213,6 +215,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 					//stop立即动作
 					if(bollardControlType==Control_Bollard_Stop)
 					{
+						bottonFlag=1;//
 						BollardControlStop=ControlEnable;
 						BollardControlUp=ControlDisable;
 						BollardControlDown=ControlDisable;
@@ -251,6 +254,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						//stop、emergency立即动作
 						if(remoteValue==RemoteStop)
 						{
+							remoteFlag=1;//
 							BollardControlStop=ControlEnable;
 							BollardControlUp=ControlDisable;
 							BollardControlDown=ControlDisable;
@@ -270,6 +274,8 @@ void TIM3_IRQHandler(void)   //TIM3中断
 							BollardControlDown=ControlDisable;
 							BollardControlUp=ControlEnable;
 							AlarmControl=ControlEnable;
+							//alarmOn=1;
+							//maxSliceCnt=0;
 							controlOn=1;
 							controlSource=Remote;
 							TIM_Cmd(TIM2,ENABLE); 
@@ -342,16 +348,23 @@ void TIM3_IRQHandler(void)   //TIM3中断
 					{
 						case Emergency:
 							AlarmControl=ControlEnable;//紧急上升同时预警
-							alarmOn=1;
+							//alarmOn=1;
+							//maxSliceCnt=0;
 							StatusOutput1=1;
 							StatusOutput2=0;
 							break;
 						case TopReached:
+							StatusOutput1=1;
+							StatusOutput2=0;
+							break;
 						case UpIng:
 							StatusOutput1=1;
 							StatusOutput2=0;
 							break;
 						case BottomReached:
+							StatusOutput1=0;
+							StatusOutput2=1;							
+							break;
 						case DownIng:
 							StatusOutput1=0;
 							StatusOutput2=1;							
@@ -361,9 +374,9 @@ void TIM3_IRQHandler(void)   //TIM3中断
 							StatusOutput2=1;
 							break;
 						
-						//save status-change event
-						Status_Event_Save(bollardStatus);
 					}
+					//save status-change event
+					Status_Event_Save(bollardStatus);
 				}
 			}
 			if(!(timeSliceCnt%49))//490ms时间片
@@ -386,6 +399,12 @@ void TIM3_IRQHandler(void)   //TIM3中断
 									controlOn=0;
 									//
 									Control_Event_Save(Control_Bollard_Up,Top,controlSource);
+									
+								}
+								//emergency case, switch off the alarm
+								else if(AlarmControl==ControlEnable)
+								{
+										AlarmControl=ControlDisable;
 								}
 								else
 									Error_Event_Save(illegalUp,controlSource);
