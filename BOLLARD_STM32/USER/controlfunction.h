@@ -65,20 +65,21 @@ typedef enum
 
 typedef enum
 {
-	Connection0=0x00,
+	Connection0=0x03,//stop
 	Connection1=0x02,
 	Connection2=0x01,
-	Connection3=0x03
+	Connection3=0x00//error
 }eCascadeConnection;
 
 typedef enum
 {
-	NoAction=0x00,//middle->error state
+	NoAction=0x00,
 	Emergency=0x01,
-	UpIng	=0x02,
-	DownIng=0x03,
-	TopReached=0x04,
-	BottomReached=0x05,
+	Stop=0x02,//middle->error state
+	UpIng=0x03,
+	DownIng=0x04,
+	TopReached=0x05,
+	BottomReached=0x06,
 }eBollardStatus;
 
 typedef enum

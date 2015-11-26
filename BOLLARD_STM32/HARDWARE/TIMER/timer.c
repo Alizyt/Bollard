@@ -116,8 +116,8 @@ void TIM2_IRQHandler(void)
 				case Synchro:
 					switch(cascadeConnectionAft)
 					{
-						case Connection0:
-//									BollardControlStop=ControlDisable;
+						case Connection0://stop
+							BollardControlStop=ControlDisable;
 							break;
 						case Connection1:
 							BollardControlUp=ControlDisable;
@@ -129,7 +129,7 @@ void TIM2_IRQHandler(void)
 							//存下降超时记录
 							Control_Event_Save(Control_Bollard_Down,DownTimeout,controlSource);
 							break;
-						case Connection3:
+						case Connection3://not exist
 							//未知故障，不动作
 							break;
 					}
@@ -307,10 +307,13 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						TIM_SetCounter(TIM2,0);						
 						switch(cascadeConnectionAft)
 						{
-							case Connection0://not exist
-	// 							BollardControlStop=ControlEnable;
-	// 							BollardControlUp=ControlDisable;
-	// 							BollardControlDown=ControlDisable;
+							case Connection0://stop
+	 							BollardControlStop=ControlEnable;
+	 							BollardControlUp=ControlDisable;
+	 							BollardControlDown=ControlDisable;
+								controlOn=1;								
+								controlSource=Synchro;//cascade
+								TIM_Cmd(TIM2,ENABLE);
 								break;
 							case Connection1:
 								BollardControlDown=ControlDisable;
@@ -319,6 +322,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 // 									timeSliceCnt=1;
 								controlOn=1;								
 								controlSource=Synchro;//cascade
+								TIM_Cmd(TIM2,ENABLE);
 								//存SD卡记录，级联上升记录
 								break;
 							case Connection2:
@@ -328,16 +332,17 @@ void TIM3_IRQHandler(void)   //TIM3中断
 // 									timeSliceCnt=1;
 								controlOn=1;								
 								controlSource=Synchro;//cascade
+								TIM_Cmd(TIM2,ENABLE);
 								//存SD卡记录，级联下降记录
 								break;
-							case Connection3:
+							case Connection3://won't happen here
 								//未知故障，不动作
 								break;
 						}
 						//cascadeFlag=0;
 						//controlOn=1;								
 						//controlSource=Synchro;//cascade
-						TIM_Cmd(TIM2,ENABLE); //
+						//TIM_Cmd(TIM2,ENABLE); //
 					}
 					//maxSliceCnt=0;//开始计时
 				}
@@ -352,19 +357,19 @@ void TIM3_IRQHandler(void)   //TIM3中断
 							//maxSliceCnt=0;
 							StatusOutput1=1;
 							StatusOutput2=0;
+							//in case of controldown enabled
+							BollardControlDown=ControlDisable;
 							break;
-						case TopReached:
-							StatusOutput1=1;
+						case Stop:
+							StatusOutput1=0;
 							StatusOutput2=0;
 							break;
+						case TopReached:
 						case UpIng:
 							StatusOutput1=1;
 							StatusOutput2=0;
 							break;
 						case BottomReached:
-							StatusOutput1=0;
-							StatusOutput2=1;							
-							break;
 						case DownIng:
 							StatusOutput1=0;
 							StatusOutput2=1;							

@@ -225,7 +225,7 @@ eLimitValue Limit_Scan(void)
 /******Scan Cascade Connected or not******/
 eCascadeConnection Cascade_Connection_Scan(void)
 {
-	if((CascadeConnection1!=CascadeConnected)&&(CascadeConnection2!=CascadeConnected))
+	if((CascadeConnection1==CascadeConnected)&&(CascadeConnection2==CascadeConnected))
 		return Connection0;
 	else if((CascadeConnection1==CascadeConnected)&&(CascadeConnection2!=CascadeConnected))
 		return Connection1;
@@ -240,6 +240,7 @@ extern eLimitValue limitValue;
 eBollardStatus Bollard_Status_Scan(void)
 {
 	if((EmergencyUp==StatusTrue||remoteEmergencyStatus)) 	return Emergency;
+	else if(BollardUpIng==StatusTrue && BollardDownIng==StatusTrue) return Stop;
 	else if(BollardUpIng==StatusTrue)		return UpIng;
 	else if(BollardDownIng==StatusTrue)	return DownIng;
 	else if(limitValue==upperLimitReach) return TopReached;
