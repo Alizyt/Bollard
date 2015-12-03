@@ -15,7 +15,7 @@
 
 u8 upDownTime=6;//最大升降时间，可设置
 u8 controllerAddr;
-
+u8 sdBug[20];//
 void systemInit(void)
 {
 				delay_init();						//延时函数初始化
@@ -43,6 +43,7 @@ void systemInit(void)
  				LED0=0;
 				f_mount(0,fs[0]);				//挂载SD卡
 				
+				write_file(sdBug,1,0,"zzz");//sd bug, first file damaged	
 				Power_Event_Save(powerOn);
 				//RTC_Set(2015,11,23,20,10,0);
 

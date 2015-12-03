@@ -98,7 +98,7 @@ void SD_Write_Process(u8* pucFrame,u16 len,eEventType type)
 	switch(type)
 	{
 		case powerEvent:
-			write_file(sdFrameascii,1,2*len,"zzz");		
+			//write_file(sdFrameascii,1,2*len,"zzz");		
 			write_file(sdFrameascii,1,2*len,"pow");
 			break;
 		case controlEvent:

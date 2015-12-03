@@ -38,7 +38,7 @@ void EXTIX_Init(void)
 
   	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);	//使能复用功能时钟
 
-		//GPIOC.5中断线以及中断初始化配置  上升沿触发
+		//GPIOC.5中断线以及中断初始化配置  下降沿触发
 		GPIO_EXTILineConfig(GPIO_PortSourceGPIOC,GPIO_PinSource5);
 		EXTI_InitStructure.EXTI_Line = EXTI_Line5;//UpperLimit1
 		EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
@@ -46,20 +46,20 @@ void EXTIX_Init(void)
 		EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 		EXTI_Init(&EXTI_InitStructure);	 	//根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 		
-		//GPIOD.8中断线以及中断初始化配置 上升沿触发 
+		//GPIOD.8中断线以及中断初始化配置 下降沿触发 
   	GPIO_EXTILineConfig(GPIO_PortSourceGPIOD,GPIO_PinSource8);
 	 	EXTI_InitStructure.EXTI_Line = EXTI_Line8;//UpperLimit2
   	EXTI_Init(&EXTI_InitStructure);	  //根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 
-		//GPIOE.15中断线以及中断初始化配置 上升沿触发 
+		//GPIOE.15中断线以及中断初始化配置 下降沿触发 
   	GPIO_EXTILineConfig(GPIO_PortSourceGPIOE,GPIO_PinSource15);
 	 	EXTI_InitStructure.EXTI_Line = EXTI_Line15;//UpperLimit3
   	EXTI_Init(&EXTI_InitStructure);	  //根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 
-		//GPIOE.2中断线以及中断初始化配置 下降沿触发 
+		//GPIOE.2中断线以及中断初始化配置 上升沿触发 
   	GPIO_EXTILineConfig(GPIO_PortSourceGPIOE,GPIO_PinSource2);
   	EXTI_InitStructure.EXTI_Line=EXTI_Line2;//MXOF
-		EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+		EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
   	EXTI_Init(&EXTI_InitStructure);	  	//根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 
 		NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;			//使能limit所在的外部中断通道
@@ -160,7 +160,7 @@ void EXTI15_10_IRQHandler(void)
 void EXTI2_IRQHandler(void)
 {
 	delay_ms(10);//消抖
-	if(MXOF==StatusTrue) 	  //MXOF
+	if(MXOF==PowerOff) 	  //MXOF
 	{
 		//断电，保存数据
 		Power_Event_Save(powerOff);

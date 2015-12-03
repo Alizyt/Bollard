@@ -146,6 +146,7 @@ typedef enum
 #define CascadeConnected		0x01
 #define StatusTrue					0x00	//IN7 IN8 IN11Âß¼­·´
 #define CoilTrue						0x01
+#define	PowerOff						0x01
 //#define ActionTrue					0x01	//¸Ä°æºóÉ¾³ý£¬IN7 IN8Âß¼­·´
 
 // #define BottonUp						0x01

@@ -101,9 +101,9 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (controlfunction.h)(0x56570CE7)
+I (controlfunction.h)(0x56603766)
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
-F (.\init.c)(0x565708C1)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\init.o" --omf_browse "..\OBJ\init.crf" --depend "..\OBJ\init.d")
+F (.\init.c)(0x56603C9A)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\init.o" --omf_browse "..\OBJ\init.crf" --depend "..\OBJ\init.d")
 I (init.h)(0x55F65FBC)
 I (..\HARDWARE\LED\led.h)(0x55C8416A)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
@@ -152,11 +152,11 @@ I (..\FATFS\src\ff.h)(0x5023C19E)
 I (..\FATFS\src\ffconf.h)(0x50236DB2)
 I (..\HARDWARE\MALLOC\malloc.h)(0x55F81DFF)
 I (..\HARDWARE\SD\mmc_sd.h)(0x55F8F13E)
-I (controlfunction.h)(0x56570CE7)
+I (controlfunction.h)(0x56603766)
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
 I (..\HARDWARE\EXTI\exti.h)(0x5651765F)
 F (.\controlfunction.c)(0x5656EFB0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\controlfunction.o" --omf_browse "..\OBJ\controlfunction.crf" --depend "..\OBJ\controlfunction.d")
-I (controlfunction.h)(0x56570CE7)
+I (controlfunction.h)(0x56603766)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -935,7 +935,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\HARDWARE\MODBUS\include\mb.h)(0x45783CFA)
 I (..\HARDWARE\MODBUS\include\mbport.h)(0x5527561B)
 I (..\HARDWARE\MODBUS\include\mbproto.h)(0x55D1881E)
@@ -1119,7 +1119,7 @@ I (D:\apps\keil\ARM\ARMCC\bin\..\include\stdint.h)(0x50F96150)
 I (..\HARDWARE\MODBUS\include\mbport.h)(0x5527561B)
 I (..\HARDWARE\MODBUS\include\mbproto.h)(0x55D1881E)
 I (..\FATFS\src\integer.h)(0x552DC531)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -1377,9 +1377,9 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\LED\led.h)(0x55C8416A)
 I (..\SYSTEM\delay\delay.h)(0x50513B7A)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
-F (..\HARDWARE\SD\recordmanage.c)(0x5651CF53)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\recordmanage.o" --omf_browse "..\OBJ\recordmanage.crf" --depend "..\OBJ\recordmanage.d")
+F (..\HARDWARE\SD\recordmanage.c)(0x56603C8F)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\recordmanage.o" --omf_browse "..\OBJ\recordmanage.crf" --depend "..\OBJ\recordmanage.d")
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -1410,7 +1410,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\HARDWARE\RTC\rtc.h)(0x50498384)
 I (..\HARDWARE\MODBUS\include\mbproto.h)(0x55D1881E)
 I (..\FATFS\src\integer.h)(0x552DC531)
@@ -1482,7 +1482,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (..\HARDWARE\EXTI\exti.c)(0x5651C23D)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\exti.o" --omf_browse "..\OBJ\exti.crf" --depend "..\OBJ\exti.d")
+F (..\HARDWARE\EXTI\exti.c)(0x56603794)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\exti.o" --omf_browse "..\OBJ\exti.crf" --depend "..\OBJ\exti.d")
 I (..\HARDWARE\EXTI\exti.h)(0x5651765F)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
@@ -1515,7 +1515,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\RTC\rtc.h)(0x50498384)
 I (..\SYSTEM\delay\delay.h)(0x50513B7A)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
 F (..\HARDWARE\IIC\myiic.c)(0x53044636)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\myiic.o" --omf_browse "..\OBJ\myiic.crf" --depend "..\OBJ\myiic.d")
 I (..\HARDWARE\IIC\myiic.h)(0x5066966E)
@@ -1585,7 +1585,7 @@ I (..\SYSTEM\delay\delay.h)(0x50513B7A)
 F (..\HARDWARE\MODBUS\functions\mbfunction.c)(0x55D18BB0)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\mbfunction.o" --omf_browse "..\OBJ\mbfunction.crf" --depend "..\OBJ\mbfunction.d")
 I (D:\apps\keil\ARM\ARMCC\bin\..\include\stdlib.h)(0x50F96150)
 I (D:\apps\keil\ARM\ARMCC\bin\..\include\string.h)(0x50F96150)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 I (..\SYSTEM\sys\sys.h)(0x5055B57C)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -1798,7 +1798,7 @@ I (D:\apps\keil\ARM\ARMCC\bin\..\include\stdio.h)(0x50F96150)
 I (..\HARDWARE\MALLOC\malloc.h)(0x55F81DFF)
 I (..\HARDWARE\RTC\rtc.h)(0x50498384)
 I (..\HARDWARE\SD\recordmanage.h)(0x56376CE1)
-I (..\USER\controlfunction.h)(0x56570CE7)
+I (..\USER\controlfunction.h)(0x56603766)
 F (..\FATFS\exfuns\exfuns.c)(0x552DC5E8)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\CORE -I..\USER -I..\STM32F10x_FWLib\inc -I..\HARDWARE\MODBUS\ascii -I..\HARDWARE\MODBUS\functions -I..\HARDWARE\MODBUS\include -I..\HARDWARE\MODBUS\rtu -I..\HARDWARE\MODBUS\tcp -I..\HARDWARE\PORT -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\RS485 -I..\HARDWARE\LED -I..\HARDWARE\MALLOC -I..\HARDWARE\SD -I..\HARDWARE\SPI -I..\FATFS -I..\FATFS\exfuns -I..\FATFS\src -I..\HARDWARE\RTC -I..\HARDWARE\TIMER -I..\HARDWARE\KEY -I..\HARDWARE\BEEP -I..\HARDWARE\EXTI -I..\HARDWARE\IIC -I..\HARDWARE\24CXX -I D:\apps\keil\ARM\RV31\INC -I D:\apps\keil\ARM\CMSIS\Include -I D:\apps\keil\ARM\Inc\ST\STM32F10x -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -o "..\OBJ\exfuns.o" --omf_browse "..\OBJ\exfuns.crf" --depend "..\OBJ\exfuns.d")
 I (D:\apps\keil\ARM\ARMCC\bin\..\include\string.h)(0x50F96150)
 I (..\FATFS\exfuns\exfuns.h)(0x503CCF24)
