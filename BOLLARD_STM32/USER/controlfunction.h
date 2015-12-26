@@ -180,6 +180,7 @@ typedef enum
 //#define AlarmControlIng			PAout(2)
 #define StatusOutput1				PEout(4)//
 #define StatusOutput2				PEout(3)//
+#define PowerControl				PAout(6)
 /******Botton Control && Statuas Input Definition (CPU input)******/
 #define BollardBottonUp 		PBin(2)
 #define BollardBottonDown 	PEin(7)

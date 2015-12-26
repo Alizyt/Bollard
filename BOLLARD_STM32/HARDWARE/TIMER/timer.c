@@ -24,6 +24,7 @@ extern eCascadeConnection cascadeConnectionAft;
 extern eGroundCoilStatus groundCoilStatus;
 
 u8 bottonFlag=0,remoteFlag=0,cascadeFlag=0;
+u8 stopFlag=0;
 eBollardControlSource controlSource;
 
 //通用定时器2中断初始化
@@ -82,7 +83,7 @@ void TIM2_IRQHandler(void)
 							//存下降超时记录
 							Control_Event_Save(Control_Bollard_Down,DownTimeout,controlSource);
 							break;
-						case Control_Bollard_Stop:
+						case Control_Bollard_Stop://won't happen
 							bottonFlag=0;//
 							BollardControlStop=ControlDisable;
 							break;
@@ -102,7 +103,7 @@ void TIM2_IRQHandler(void)
 							//存下降超时记录
 							Control_Event_Save(Control_Bollard_Down,DownTimeout,controlSource);
 							break;
-						case RemoteStop:
+						case RemoteStop://won't happen
 							remoteFlag=0;//
 							BollardControlStop=ControlDisable;
 							break;
@@ -116,7 +117,7 @@ void TIM2_IRQHandler(void)
 				case Synchro:
 					switch(cascadeConnectionAft)
 					{
-						case Connection0://stop
+						case Connection0://stop,won't happen
 							BollardControlStop=ControlDisable;
 							break;
 						case Connection1:
@@ -203,6 +204,16 @@ void TIM3_IRQHandler(void)   //TIM3中断
 			timeSliceCnt++;
 			if(!(timeSliceCnt%9))//90ms时间片
 			{
+				if(stopFlag)
+				{
+					stopFlag=0;
+					BollardControlStop=ControlDisable;
+					controlOn=0;
+					if(bottonFlag)
+						bottonFlag=0;
+					else if(remoteFlag)
+						remoteFlag=0;
+				}
 				if(bottonPressed)
 				{
 					bottonPressed=0;
@@ -215,6 +226,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 					//stop立即动作
 					if(bollardControlType==Control_Bollard_Stop)
 					{
+						stopFlag=1;
 						bottonFlag=1;//
 						BollardControlStop=ControlEnable;
 						BollardControlUp=ControlDisable;
@@ -223,10 +235,11 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						controlSource=Botton;//botton
 						if(alarmOn==1)
 						{
-							AlarmControl=ControlDisable;
+							//AlarmControl=ControlDisable;
 							alarmOn=0;
 						}
-						TIM_Cmd(TIM2,ENABLE);
+						AlarmControl=ControlDisable;//in case of emergency->stop
+						//TIM_Cmd(TIM2,ENABLE);
 					}
 					//up、down先预警再动作
 					else
@@ -254,6 +267,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						//stop、emergency立即动作
 						if(remoteValue==RemoteStop)
 						{
+							stopFlag=1;
 							remoteFlag=1;//
 							BollardControlStop=ControlEnable;
 							BollardControlUp=ControlDisable;
@@ -262,10 +276,11 @@ void TIM3_IRQHandler(void)   //TIM3中断
 							controlSource=Remote;//remote
 							if(alarmOn==1)
 							{
-								AlarmControl=ControlDisable;
+								//AlarmControl=ControlDisable;
 								alarmOn=0;
 							}
-							TIM_Cmd(TIM2,ENABLE);
+							AlarmControl=ControlDisable;//in case of emergency->stop
+							//TIM_Cmd(TIM2,ENABLE);
 						}
 						else if(remoteValue==RemoteEmergency)
 						{
@@ -308,12 +323,13 @@ void TIM3_IRQHandler(void)   //TIM3中断
 						switch(cascadeConnectionAft)
 						{
 							case Connection0://stop
+								stopFlag=1;
 	 							BollardControlStop=ControlEnable;
 	 							BollardControlUp=ControlDisable;
 	 							BollardControlDown=ControlDisable;
 								controlOn=1;								
 								controlSource=Synchro;//cascade
-								TIM_Cmd(TIM2,ENABLE);
+								//TIM_Cmd(TIM2,ENABLE);
 								break;
 							case Connection1:
 								BollardControlDown=ControlDisable;
